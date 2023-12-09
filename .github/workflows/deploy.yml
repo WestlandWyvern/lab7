@@ -20,6 +20,6 @@ jobs:
           && sudo hugo
      
       - name: deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           folder: public
