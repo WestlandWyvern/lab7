@@ -16,6 +16,7 @@ jobs:
         run:
           sudo apt-get update
           && sudo apt-get install -y hugo
+          && hugo mod get -u github.com/hbstack/content-panel
           && sudo hugo
      
       - name: deploy
