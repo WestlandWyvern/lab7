@@ -16,7 +16,7 @@ jobs:
           && sudo hugo
      
       - name: deploy
-        uses: JamesIves/github-pages-deploy-action@v4.3.2
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: public
