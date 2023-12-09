@@ -1,8 +1,5 @@
 on: push
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+permissions: write-all
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -16,7 +13,6 @@ jobs:
         run:
           sudo apt-get update
           && sudo apt-get install -y hugo
-          && hugo mod get -u github.com/hbstack/content-panel
           && sudo hugo
      
       - name: deploy
