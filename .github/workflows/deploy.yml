@@ -1,21 +1,32 @@
-on: push
-permissions: write-all
+name: github pages
+
+on:
+  push:
+    branches:
+      - main  
+  pull_request:
+
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - name: checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
-          submodules: 'true'
+          submodules: true
+          fetch-depth: 0  
 
-      - name: hugo installation
-        run:
-          sudo apt-get update
-          && sudo apt-get install -y hugo
-          && sudo hugo
-     
-      - name: deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          folder: public
+          hugo-version: '0.107.0'
+          extended: true
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
